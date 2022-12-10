@@ -1,15 +1,24 @@
 class MealItem extends HTMLElement {
+  constructor() {
+    super();
+    this.shadowDOM = this.attachShadow({ mode: "open" });
+  }
+
+  connectedCallback(event) {
+    this._clickEvent = event;
+  }
+
   set meal(meal) {
     this._meal = meal;
     this.render();
   }
 
   get value() {
-    return this.querySelector("#idMeal").value;
+    return this.shadowDOM.querySelector("#idMeal").value;
   }
 
   render() {
-    this.innerHTML = `
+    this.shadowDOM.innerHTML = `
     <div class="card">
     <img src="${this._meal.image}" class="card-img-top" alt="${this._meal.title}" />
     <div class="card-body">
@@ -22,10 +31,15 @@ class MealItem extends HTMLElement {
           type="hidden"
           value="${this._meal.id}"
         />
-        <button href="recipe.html" class="btn btn-primary" type="submit">See Recipe</button>
+        <a href="recipe.html" class="btn btn-primary" id="recipeButton" >See Recipe</a>
     </div>
   </div>
     `;
+
+    this.querySelector("#recipeButton").addEventListener(
+      "click",
+      this._clickEvent
+    );
   }
 }
 

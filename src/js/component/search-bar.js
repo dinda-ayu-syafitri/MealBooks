@@ -1,4 +1,11 @@
+import css from "bootstrap/dist/css/bootstrap.min.css";
+
 class SearchBar extends HTMLElement {
+  constructor() {
+    super();
+    this.shadowDOM = this.attachShadow({ mode: "open" });
+  }
+
   connectedCallback() {
     this.render();
   }
@@ -9,11 +16,14 @@ class SearchBar extends HTMLElement {
   }
 
   get value() {
-    return this.querySelector("#searchElement").value;
+    return this.shadowDOM.querySelector("#searchElement").value;
   }
 
   render() {
-    this.innerHTML = `
+    this.shadowDOM.InnerHTML = `
+    <style>
+        ${css}
+      </style>
     <div id="search-container" class="search-container container">
     <div class="row">
       <div class="col-9">
@@ -33,10 +43,9 @@ class SearchBar extends HTMLElement {
   </div>
     `;
 
-    this.querySelector("#searchButtonElement").addEventListener(
-      "click",
-      this._clickEvent
-    );
+    this.shadowDOM
+      .querySelector("#searchButtonElement")
+      .addEventListener("click", this._clickEvent);
   }
 }
 

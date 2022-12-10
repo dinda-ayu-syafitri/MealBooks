@@ -36,8 +36,8 @@ const main = () => {
     }
   };
 
-  const renderResultRecipe = (results) => {
-    mealListElement.meals = results;
+  const renderResultRecipe = (extendedIngredients) => {
+    mealListElement.meals = extendedIngredients;
   };
 
   const fallbackResultRecipe = (message) => {
