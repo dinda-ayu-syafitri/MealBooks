@@ -41,8 +41,8 @@ const main = () => {
     }
   };
 
-  const renderResultRecipe = (extendedIngredients) => {
-    recipeDetailElement.recipe = extendedIngredients;
+  const renderResultRecipe = (results) => {
+    recipeDetailElement.recipe = results;
     console.log("test");
   };
 
@@ -51,6 +51,7 @@ const main = () => {
   };
 
   recipeBtnElement.clickEvent = onButtonRecipeClicked;
+  // recipeDetailElement.onclick = onButtonRecipeClicked;
 };
 
 export default main;
