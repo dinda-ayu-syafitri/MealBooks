@@ -1,3 +1,6 @@
+import css from "bootstrap/dist/css/bootstrap.min.css";
+import "./recipe-btn.js";
+
 class MealItem extends HTMLElement {
   constructor() {
     super();
@@ -19,8 +22,11 @@ class MealItem extends HTMLElement {
 
   render() {
     this.shadowDOM.innerHTML = `
-    <div class="card">
-    <img src="${this._meal.image}" class="card-img-top" alt="${this._meal.title}" />
+    <style>
+        ${css}
+      </style>
+    <div class="card m-3">
+    <img src="${this._meal.image}" class="card-img-top w-100" alt="${this._meal.title}" />
     <div class="card-body">
       <h5 class="card-title">
       ${this._meal.title}
@@ -31,15 +37,10 @@ class MealItem extends HTMLElement {
           type="hidden"
           value="${this._meal.id}"
         />
-        <a href="recipe.html" class="btn btn-primary" id="recipeButton" >See Recipe</a>
+        <recipe-btn></recipe-btn>
     </div>
   </div>
     `;
-
-    this.querySelector("#recipeButton").addEventListener(
-      "click",
-      this._clickEvent
-    );
   }
 }
 

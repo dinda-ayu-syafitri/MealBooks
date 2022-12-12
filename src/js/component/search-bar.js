@@ -20,7 +20,7 @@ class SearchBar extends HTMLElement {
   }
 
   render() {
-    this.shadowDOM.InnerHTML = `
+    this.shadowDOM.innerHTML = `
     <style>
         ${css}
       </style>

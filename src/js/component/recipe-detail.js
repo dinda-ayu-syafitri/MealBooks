@@ -1,15 +1,28 @@
+import "./meal-item.js";
+import "./recipe-btn.js";
+import css from "bootstrap/dist/css/bootstrap.min.css";
+
 class RecipeDetail extends HTMLElement {
+  constructor() {
+    super();
+    this.shadowDOM = this.attachShadow({ mode: "open" });
+  }
+
   connectedCallback() {
     this.render();
   }
 
   set recipe(recipe) {
     this._recipe = recipe;
+    this.render();
   }
 
   render() {
-    this.innerHTML = "";
-    this.innerHTML = `
+    this.shadowDOM.innerHTML = "";
+    this.shadowDOM.innerHTML = `
+    <style>
+        ${css}
+      </style>
     <h1>Recipe</h1>
     <div class="container">
       <div class="row">
@@ -22,6 +35,7 @@ class RecipeDetail extends HTMLElement {
 
       <div class="row">
         <h5>Ingredients</h5>
+        
         <ol>
           <li>1</li>
           <li>1</li>
