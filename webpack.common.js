@@ -10,6 +10,24 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(eot|woff|woff2)$/,
+        loader: "file-loader",
+        options: {
+          name: "fonts/[name].[ext]",
+        },
+      },
+      {
+        test: /\.ttf$/,
+        use: [
+          {
+            loader: "ttf-loader",
+            options: {
+              name: "./font/[hash].[ext]",
+            },
+          },
+        ],
+      },
+      {
         test: /\.css$/i,
         exclude: /styles/,
         use: ["to-string-loader", "css-loader"],

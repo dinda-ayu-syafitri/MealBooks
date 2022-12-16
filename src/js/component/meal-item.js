@@ -2,13 +2,10 @@ import css from "bootstrap/dist/css/bootstrap.min.css";
 import "./recipe-btn.js";
 
 class MealItem extends HTMLElement {
-  constructor() {
+  constructor(ev) {
     super();
     this.shadowDOM = this.attachShadow({ mode: "open" });
-  }
-
-  connectedCallback(event) {
-    this._clickEvent = event;
+    this._event = ev;
   }
 
   set meal(meal) {
@@ -17,7 +14,7 @@ class MealItem extends HTMLElement {
   }
 
   get value() {
-    return this.shadowDOM.querySelector("#idMeal").value;
+    return this.shadowDOM.querySelector(".recipeId").value;
   }
 
   render() {
@@ -25,19 +22,13 @@ class MealItem extends HTMLElement {
     <style>
         ${css}
       </style>
-    <div class="card m-3">
+    <div class="card">
     <img src="${this._meal.image}" class="card-img-top w-100" alt="${this._meal.title}" />
     <div class="card-body">
       <h5 class="card-title">
       ${this._meal.title}
       </h5>
-      <input
-          id="idMeal"
-          class="form-control"
-          type="hidden"
-          value="${this._meal.id}"
-        />
-        <recipe-btn></recipe-btn>
+      <input type="hidden" class="recipeId" value="${this._meal.id}">
     </div>
   </div>
     `;

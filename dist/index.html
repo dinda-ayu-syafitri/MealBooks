@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta http-equiv="Cache-control" content="public" />
+    <meta
+      content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff"
+      http-equiv="Content-Type"
+    />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MealBook</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <nav-bar></nav-bar>
-
     <div class="container">
-      <search-bar></search-bar>
+      <i class="fa-solid fa-wheat-awn" style="font-size: 30px"></i>
+      <search-bar
+        class="row justify-content-center align-content-center"
+      ></search-bar>
       <meal-list
-        class="container row row-cols-1 row-cols-md-4 g-2 my-3"
+        class="row justify-content-center align-items-center"
       ></meal-list>
     </div>
-    <recipe-btn></recipe-btn>
-
     <recipe-detail></recipe-detail>
     <script src="../src/js/main.js"></script>
   </body>

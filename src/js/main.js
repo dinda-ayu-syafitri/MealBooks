@@ -1,21 +1,20 @@
 import "./component/search-bar.js";
 import "./component/meal-list.js";
-import "./component/meal-item.js";
-import "./component/recipe-btn.js";
 import "./component/recipe-detail.js";
 import DataSource from "../js/data/data-source.js";
 
 const main = () => {
   const searchElement = document.querySelector("search-bar");
   const mealListElement = document.querySelector("meal-list");
-  const mealItemElement = document.querySelector("meal-item");
-  const recipeBtnElement = document.querySelector("recipe-btn");
   const recipeDetailElement = document.querySelector("recipe-detail");
 
   const onButtonSearchClicked = async () => {
     try {
+      recipeDetailElement.style.display = "none";
+      mealListElement.style.display = "";
       const result = await DataSource.searchMeal(searchElement.value);
       renderResultSearch(result);
+      getMealItem();
     } catch (message) {
       fallbackResultSearch(message);
     }
@@ -31,11 +30,12 @@ const main = () => {
 
   searchElement.clickEvent = onButtonSearchClicked;
 
-  const onButtonRecipeClicked = async () => {
+  const onButtonRecipeClicked = async (id) => {
     try {
-      const result = await DataSource.getRecipe(769754);
+      const result = await DataSource.getRecipe(id);
       renderResultRecipe(result);
-      console.log("test");
+      recipeDetailElement.style.display = "";
+      mealListElement.style.display = "none";
     } catch (message) {
       fallbackResultRecipe(message);
     }
@@ -43,15 +43,20 @@ const main = () => {
 
   const renderResultRecipe = (results) => {
     recipeDetailElement.recipe = results;
-    console.log("test");
   };
 
   const fallbackResultRecipe = (message) => {
-    console.log(message);
+    mealListElement.renderError(message);
   };
 
-  recipeBtnElement.clickEvent = onButtonRecipeClicked;
-  // recipeDetailElement.onclick = onButtonRecipeClicked;
+  const getMealItem = () => {
+    const mealItem = mealListElement.shadowRoot.querySelectorAll("recipe-btn");
+    for (let i = 0; i < mealItem.length; i++) {
+      mealItem[i].addEventListener("click", () => {
+        onButtonRecipeClicked(mealItem[i].id);
+      });
+    }
+  };
 };
 
 export default main;

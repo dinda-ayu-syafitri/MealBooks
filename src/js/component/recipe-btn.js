@@ -20,7 +20,7 @@ class RecipeBtn extends HTMLElement {
     <style>
         ${css}
       </style>
-      <a class="btn btn-primary" id="recipeBtn">See Recipe</a>
+      <a class="btn btn-primary w-100" id="recipeBtn">See Recipe</a>
     `;
 
     this.shadowDOM

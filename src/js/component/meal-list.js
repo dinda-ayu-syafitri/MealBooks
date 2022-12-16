@@ -1,5 +1,6 @@
 import css from "bootstrap/dist/css/bootstrap.min.css";
 import "./meal-item.js";
+import "./recipe-btn.js";
 
 class MealList extends HTMLElement {
   constructor() {
@@ -10,6 +11,11 @@ class MealList extends HTMLElement {
   set meals(meals) {
     this._meals = meals;
     this.render();
+  }
+
+  handleEvent(ev) {
+    console.log(ev.target.id);
+    ev.stopPropagation();
   }
 
   renderError(message) {
@@ -26,12 +32,22 @@ class MealList extends HTMLElement {
     <style>
         ${css}
       </style>
+      
     `;
+
     this._meals.forEach((meal) => {
+      const mealItemContainer = document.createElement("div");
+      mealItemContainer.setAttribute("class", "m-3");
       const mealItemElement = document.createElement("meal-item");
+      const recipeBtn = document.createElement("recipe-btn");
+      recipeBtn.setAttribute("id", meal.id);
       mealItemElement.meal = meal;
-      this.shadowDOM.appendChild(mealItemElement);
+      this.shadowDOM.appendChild(mealItemContainer);
+      mealItemContainer.appendChild(mealItemElement);
+      mealItemContainer.appendChild(recipeBtn);
     });
+
+    this.shadowRoot.addEventListener("click", this);
   }
 }
 customElements.define("meal-list", MealList);

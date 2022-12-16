@@ -15,7 +15,7 @@ class NavBar extends HTMLElement {
     <style>
         ${css}
       </style>
-    <div class="container my-3">
+    <div class="text-center mb-5 py-1 bg-dark text-white">
   <h2>Meal Books</h2>
 </div>
     `;

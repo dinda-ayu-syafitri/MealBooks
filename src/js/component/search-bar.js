@@ -1,5 +1,4 @@
 import css from "bootstrap/dist/css/bootstrap.min.css";
-
 class SearchBar extends HTMLElement {
   constructor() {
     super();
@@ -24,9 +23,10 @@ class SearchBar extends HTMLElement {
     <style>
         ${css}
       </style>
-    <div id="search-container" class="search-container container">
-    <div class="row">
+    <div id="search-container" class="search-container">
+    <div class="row justify-content-center align-items-center">
       <div class="col-9">
+      <i class="fa-solid fa-address-book"></i>
         <input
           placeholder="Search Meal"
           id="searchElement"
@@ -34,7 +34,7 @@ class SearchBar extends HTMLElement {
           type="search"
         />
       </div>
-      <div class="col-3">
+      <div class="col-1">
         <button id="searchButtonElement" class="btn btn-primary" type="submit">
           Search
         </button>
