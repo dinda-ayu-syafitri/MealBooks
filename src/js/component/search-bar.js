@@ -1,8 +1,9 @@
-import css from "bootstrap/dist/css/bootstrap.min.css";
+import css from 'bootstrap/dist/css/bootstrap.min.css';
+
 class SearchBar extends HTMLElement {
   constructor() {
     super();
-    this.shadowDOM = this.attachShadow({ mode: "open" });
+    this.shadowDOM = this.attachShadow({ mode: 'open' });
   }
 
   connectedCallback() {
@@ -15,18 +16,26 @@ class SearchBar extends HTMLElement {
   }
 
   get value() {
-    return this.shadowDOM.querySelector("#searchElement").value;
+    return this.shadowDOM.querySelector('#searchElement').value;
   }
 
   render() {
     this.shadowDOM.innerHTML = `
     <style>
         ${css}
+
+        .btn {
+          background-color : #fad68a;
+        }
+
+        .btn:hover {
+          background-color : #fff;
+          color : #f19a33;
+          border : 1px solid #f19a33;
+        }
       </style>
-    <div id="search-container" class="search-container">
-    <div class="row justify-content-center align-items-center">
-      <div class="col-9">
-      <i class="fa-solid fa-address-book"></i>
+      <div id="search-container" class="mt-5 row">
+      <div class="col-8">
         <input
           placeholder="Search Meal"
           id="searchElement"
@@ -34,19 +43,16 @@ class SearchBar extends HTMLElement {
           type="search"
         />
       </div>
-      <div class="col-1">
-        <button id="searchButtonElement" class="btn btn-primary" type="submit">
-          Search
-        </button>
+      <div class="col-4">
+        <button id="searchButtonElement" class="btn" type="submit">Search</button>
       </div>
     </div>
-  </div>
     `;
 
     this.shadowDOM
-      .querySelector("#searchButtonElement")
-      .addEventListener("click", this._clickEvent);
+      .querySelector('#searchButtonElement')
+      .addEventListener('click', this._clickEvent);
   }
 }
 
-customElements.define("search-bar", SearchBar);
+customElements.define('search-bar', SearchBar);

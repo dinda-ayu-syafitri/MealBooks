@@ -1,2 +1,11 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+
+@font-face {
+  font-family: "Quicksand";
+  src: url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+}

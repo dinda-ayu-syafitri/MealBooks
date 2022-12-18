@@ -1,10 +1,10 @@
-import css from "bootstrap/dist/css/bootstrap.min.css";
-import "./recipe-btn.js";
+import css from 'bootstrap/dist/css/bootstrap.min.css';
+import './recipe-btn.js';
 
 class MealItem extends HTMLElement {
   constructor(ev) {
     super();
-    this.shadowDOM = this.attachShadow({ mode: "open" });
+    this.shadowDOM = this.attachShadow({ mode: 'open' });
     this._event = ev;
   }
 
@@ -14,7 +14,7 @@ class MealItem extends HTMLElement {
   }
 
   get value() {
-    return this.shadowDOM.querySelector(".recipeId").value;
+    return this.shadowDOM.querySelector('.recipeId').value;
   }
 
   render() {
@@ -22,7 +22,7 @@ class MealItem extends HTMLElement {
     <style>
         ${css}
       </style>
-    <div class="card">
+    <div class="card border-light h-100">
     <img src="${this._meal.image}" class="card-img-top w-100" alt="${this._meal.title}" />
     <div class="card-body">
       <h5 class="card-title">
@@ -35,4 +35,4 @@ class MealItem extends HTMLElement {
   }
 }
 
-customElements.define("meal-item", MealItem);
+customElements.define('meal-item', MealItem);

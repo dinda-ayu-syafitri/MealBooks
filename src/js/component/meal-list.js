@@ -1,11 +1,11 @@
-import css from "bootstrap/dist/css/bootstrap.min.css";
-import "./meal-item.js";
-import "./recipe-btn.js";
+import css from 'bootstrap/dist/css/bootstrap.min.css';
+import './meal-item.js';
+import './recipe-btn.js';
 
 class MealList extends HTMLElement {
   constructor() {
     super();
-    this.shadowDOM = this.attachShadow({ mode: "open" });
+    this.shadowDOM = this.attachShadow({ mode: 'open' });
   }
 
   set meals(meals) {
@@ -15,7 +15,7 @@ class MealList extends HTMLElement {
 
   handleEvent(ev) {
     console.log(ev.target.id);
-    ev.stopPropagation();
+    this.ev.stopPropagation();
   }
 
   renderError(message) {
@@ -31,23 +31,30 @@ class MealList extends HTMLElement {
     this.shadowDOM.innerHTML = `
     <style>
         ${css}
+
+        recipe-btn {
+          bottom = 0;
+        }
       </style>
       
     `;
 
     this._meals.forEach((meal) => {
-      const mealItemContainer = document.createElement("div");
-      mealItemContainer.setAttribute("class", "m-3");
-      const mealItemElement = document.createElement("meal-item");
-      const recipeBtn = document.createElement("recipe-btn");
-      recipeBtn.setAttribute("id", meal.id);
+      const mealItemContainer = document.createElement('div');
+      mealItemContainer.setAttribute(
+        'class',
+        'm-3 p-2 card border-white shadow col-lg-3 col-sm-12 row flex-column justify-content-between'
+      );
+      const mealItemElement = document.createElement('meal-item');
+      const recipeBtn = document.createElement('recipe-btn');
+      recipeBtn.setAttribute('id', meal.id);
       mealItemElement.meal = meal;
       this.shadowDOM.appendChild(mealItemContainer);
       mealItemContainer.appendChild(mealItemElement);
       mealItemContainer.appendChild(recipeBtn);
     });
 
-    this.shadowRoot.addEventListener("click", this);
+    this.shadowRoot.addEventListener('click', this);
   }
 }
-customElements.define("meal-list", MealList);
+customElements.define('meal-list', MealList);

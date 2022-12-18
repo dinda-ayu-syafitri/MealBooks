@@ -1,17 +1,17 @@
-import "./component/search-bar.js";
-import "./component/meal-list.js";
-import "./component/recipe-detail.js";
-import DataSource from "../js/data/data-source.js";
+import './component/search-bar.js';
+import './component/meal-list.js';
+import './component/recipe-detail.js';
+import DataSource from './data/data-source.js';
 
 const main = () => {
-  const searchElement = document.querySelector("search-bar");
-  const mealListElement = document.querySelector("meal-list");
-  const recipeDetailElement = document.querySelector("recipe-detail");
+  const searchElement = document.querySelector('search-bar');
+  const mealListElement = document.querySelector('meal-list');
+  const recipeDetailElement = document.querySelector('recipe-detail');
 
   const onButtonSearchClicked = async () => {
     try {
-      recipeDetailElement.style.display = "none";
-      mealListElement.style.display = "";
+      recipeDetailElement.style.display = 'none';
+      mealListElement.style.display = '';
       const result = await DataSource.searchMeal(searchElement.value);
       renderResultSearch(result);
       getMealItem();
@@ -34,8 +34,15 @@ const main = () => {
     try {
       const result = await DataSource.getRecipe(id);
       renderResultRecipe(result);
-      recipeDetailElement.style.display = "";
-      mealListElement.style.display = "none";
+      recipeDetailElement.style.display = '';
+      mealListElement.style.display = 'none';
+      recipeDetailElement.shadowRoot
+        .querySelector('#backBtn')
+        .addEventListener('click', () => {
+          onBackClicked();
+        });
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
     } catch (message) {
       fallbackResultRecipe(message);
     }
@@ -50,12 +57,17 @@ const main = () => {
   };
 
   const getMealItem = () => {
-    const mealItem = mealListElement.shadowRoot.querySelectorAll("recipe-btn");
-    for (let i = 0; i < mealItem.length; i++) {
-      mealItem[i].addEventListener("click", () => {
+    const mealItem = mealListElement.shadowRoot.querySelectorAll('recipe-btn');
+    for (let i = 0; i < mealItem.length; i += 1) {
+      mealItem[i].addEventListener('click', () => {
         onButtonRecipeClicked(mealItem[i].id);
       });
     }
+  };
+
+  const onBackClicked = () => {
+    recipeDetailElement.style.display = 'none';
+    mealListElement.style.display = '';
   };
 };
 

@@ -1,57 +1,57 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
-  entry: "./src/js/app.js",
+  entry: './src/js/app.js',
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.(eot|woff|woff2)$/,
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
-          name: "fonts/[name].[ext]",
+          name: 'fonts/[name].[ext]',
         },
       },
       {
         test: /\.ttf$/,
         use: [
           {
-            loader: "ttf-loader",
+            loader: 'ttf-loader',
             options: {
-              name: "./font/[hash].[ext]",
+              name: './font/[hash].[ext]',
             },
           },
         ],
       },
       {
-        test: /\.css$/i,
+        test: /\.(sass|css|scss)$/,
         exclude: /styles/,
-        use: ["to-string-loader", "css-loader"],
+        use: ['to-string-loader', 'css-loader'],
       },
       {
         test: /\.(sass|css|scss)$/,
         include: /styles/,
         use: [
           {
-            loader: "style-loader",
+            loader: 'style-loader',
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
           },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: () => [require("autoprefixer")],
+                plugins: () => [require('autoprefixer')],
               },
             },
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
           },
         ],
       },
@@ -59,12 +59,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./dist/index.html",
-      filename: "index.html",
-    }),
-    new HtmlWebpackPlugin({
-      template: "./dist/recipe.html",
-      filename: "recipe.html",
+      template: './dist/index.html',
+      filename: 'index.html',
     }),
   ],
 };
