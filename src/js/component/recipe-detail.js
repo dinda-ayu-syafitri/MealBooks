@@ -1,11 +1,11 @@
-import './meal-item.js';
-import './recipe-btn.js';
-import css from 'bootstrap/dist/css/bootstrap.min.css';
+import "./meal-item.js";
+import "./recipe-btn.js";
+import css from "bootstrap/dist/css/bootstrap.min.css";
 
 class RecipeDetail extends HTMLElement {
   constructor() {
     super();
-    this.shadowDOM = this.attachShadow({ mode: 'open' });
+    this.shadowDOM = this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
@@ -22,7 +22,7 @@ class RecipeDetail extends HTMLElement {
   }
 
   render() {
-    this.shadowDOM.innerHTML = '';
+    this.shadowDOM.innerHTML = "";
     this.shadowDOM.innerHTML = `
     <style>
         ${css}
@@ -85,7 +85,7 @@ class RecipeDetail extends HTMLElement {
       <div class="col-lg-7 col-md-12">
       <img src="${this._recipe.image}" alt="${this._recipe.title}" class="w-100 rounded-5"/>
 </div>
-<div class="col-lg-5 col-md-12 rounded-5 p-5" id="quickInfo">
+<div class="col-lg-5 col-md-8 rounded-5 p-5" id="quickInfo">
   <div class="row mb-5">
     <div class="col" id="time"><i class="fa-solid fa-stopwatch icon mb-2 green"></i></div>
     <div class="col" id="servings"><i class="fa-solid fa-utensils icon mb-2 green"></i></div>
@@ -120,121 +120,121 @@ class RecipeDetail extends HTMLElement {
       `;
 
     this._recipe.extendedIngredients.forEach((ingredients) => {
-      const ingredientsItem = document.createElement('li');
+      const ingredientsItem = document.createElement("li");
       ingredientsItem.innerText = ingredients.original;
       ingredientsItem.ingredients = ingredients;
       this.shadowDOM
-        .getElementById('ingredientList')
+        .getElementById("ingredientList")
         .appendChild(ingredientsItem);
     });
 
     const getInstructions = () => {
       if (this._recipe.instructions === null) {
-        const instruction = document.createElement('p');
+        const instruction = document.createElement("p");
         instruction.innerText = `Instruksi untuk resep ${this._recipe.title} belum tersedia`;
-        this.shadowDOM.getElementById('instruction').appendChild(instruction);
+        this.shadowDOM.getElementById("instruction").appendChild(instruction);
       } else {
-        const instruction = document.createElement('p');
+        const instruction = document.createElement("p");
         instruction.innerText = this._recipe.instructions;
-        this.shadowDOM.getElementById('instruction').appendChild(instruction);
+        this.shadowDOM.getElementById("instruction").appendChild(instruction);
       }
     };
 
     const getQuickInfo = () => {
       // Info Waktu
       if (this._recipe.readyInMinutes === null) {
-        const time = document.createElement('p');
+        const time = document.createElement("p");
         time.innerText = `Time estimation not yet defined`;
-        this.shadowDOM.getElementById('time').appendChild(time);
+        this.shadowDOM.getElementById("time").appendChild(time);
       } else {
-        const time = document.createElement('p');
+        const time = document.createElement("p");
         time.innerText = `${this._recipe.readyInMinutes} Minutes`;
-        this.shadowDOM.getElementById('time').appendChild(time);
+        this.shadowDOM.getElementById("time").appendChild(time);
       }
       // Info Porsi
       if (this._recipe.servings === null) {
-        const servings = document.createElement('p');
+        const servings = document.createElement("p");
         servings.innerText = `Portions estimation not yet defined`;
-        this.shadowDOM.getElementById('servings').appendChild(servings);
+        this.shadowDOM.getElementById("servings").appendChild(servings);
       } else {
-        const servings = document.createElement('p');
+        const servings = document.createElement("p");
         servings.innerText = `${this._recipe.servings} Servings`;
-        this.shadowDOM.getElementById('servings').appendChild(servings);
+        this.shadowDOM.getElementById("servings").appendChild(servings);
       }
       // Info Vegan
       if (this._recipe.vegan === null) {
-        const vegan = document.createElement('p');
-        const icon = document.createElement('i');
+        const vegan = document.createElement("p");
+        const icon = document.createElement("i");
         vegan.innerText = `Vegan Info not available`;
         icon.className = `fa-solid fa-seedling icon mb-2 red`;
-        this.shadowDOM.getElementById('vegan').appendChild(icon);
-        this.shadowDOM.getElementById('vegan').appendChild(vegan);
+        this.shadowDOM.getElementById("vegan").appendChild(icon);
+        this.shadowDOM.getElementById("vegan").appendChild(vegan);
       } else if (this._recipe.vegan === true) {
-        const vegan = document.createElement('p');
-        const icon = document.createElement('i');
+        const vegan = document.createElement("p");
+        const icon = document.createElement("i");
         vegan.innerText = `Vegan`;
         icon.className = `fa-solid fa-seedling icon mb-2 green`;
-        this.shadowDOM.getElementById('vegan').appendChild(icon);
-        this.shadowDOM.getElementById('vegan').appendChild(vegan);
+        this.shadowDOM.getElementById("vegan").appendChild(icon);
+        this.shadowDOM.getElementById("vegan").appendChild(vegan);
       } else {
-        const vegan = document.createElement('p');
-        const icon = document.createElement('i');
+        const vegan = document.createElement("p");
+        const icon = document.createElement("i");
         vegan.innerText = `Not Vegan`;
         icon.className = `fa-solid fa-seedling icon mb-2 red`;
-        this.shadowDOM.getElementById('vegan').appendChild(icon);
-        this.shadowDOM.getElementById('vegan').appendChild(vegan);
+        this.shadowDOM.getElementById("vegan").appendChild(icon);
+        this.shadowDOM.getElementById("vegan").appendChild(vegan);
       }
       // Info Gluten
       if (this._recipe.glutenFree === null) {
-        const gluten = document.createElement('p');
-        const icon = document.createElement('i');
+        const gluten = document.createElement("p");
+        const icon = document.createElement("i");
         gluten.innerText = `Gluten Info not available`;
         icon.className = `fa-solid fa-cow icon mb-2 red`;
-        this.shadowDOM.getElementById('gluten').appendChild(icon);
-        this.shadowDOM.getElementById('gluten').appendChild(gluten);
+        this.shadowDOM.getElementById("gluten").appendChild(icon);
+        this.shadowDOM.getElementById("gluten").appendChild(gluten);
       } else if (this._recipe.glutenFree === true) {
-        const gluten = document.createElement('p');
-        const icon = document.createElement('i');
+        const gluten = document.createElement("p");
+        const icon = document.createElement("i");
         gluten.innerText = `Gluten Free`;
         icon.className = `fa-solid fa-cow icon mb-2 green`;
-        this.shadowDOM.getElementById('gluten').appendChild(icon);
-        this.shadowDOM.getElementById('gluten').appendChild(gluten);
+        this.shadowDOM.getElementById("gluten").appendChild(icon);
+        this.shadowDOM.getElementById("gluten").appendChild(gluten);
       } else {
-        const gluten = document.createElement('p');
-        const icon = document.createElement('i');
+        const gluten = document.createElement("p");
+        const icon = document.createElement("i");
         gluten.innerText = `Not Gluten Free`;
         icon.className = `fa-solid fa-cow icon mb-2 red`;
-        this.shadowDOM.getElementById('gluten').appendChild(icon);
-        this.shadowDOM.getElementById('gluten').appendChild(gluten);
+        this.shadowDOM.getElementById("gluten").appendChild(icon);
+        this.shadowDOM.getElementById("gluten").appendChild(gluten);
       }
       // Info Dairy
       if (this._recipe.dairyFree === null) {
-        const dairy = document.createElement('p');
-        const icon = document.createElement('i');
+        const dairy = document.createElement("p");
+        const icon = document.createElement("i");
         dairy.innerText = `Dairy Info not available`;
         icon.className = `fa fa-solid fa-wheat-awn icon mb-2 red`;
-        this.shadowDOM.getElementById('dairy').appendChild(icon);
-        this.shadowDOM.getElementById('dairy').appendChild(dairy);
+        this.shadowDOM.getElementById("dairy").appendChild(icon);
+        this.shadowDOM.getElementById("dairy").appendChild(dairy);
       } else if (this._recipe.dairyFree === true) {
-        const dairy = document.createElement('p');
-        const icon = document.createElement('i');
+        const dairy = document.createElement("p");
+        const icon = document.createElement("i");
         dairy.innerText = `Dairy Free`;
         icon.className = `fa fa-solid fa-wheat-awn icon mb-2 green`;
-        this.shadowDOM.getElementById('dairy').appendChild(icon);
-        this.shadowDOM.getElementById('dairy').appendChild(dairy);
+        this.shadowDOM.getElementById("dairy").appendChild(icon);
+        this.shadowDOM.getElementById("dairy").appendChild(dairy);
       } else {
-        const dairy = document.createElement('p');
-        const icon = document.createElement('i');
+        const dairy = document.createElement("p");
+        const icon = document.createElement("i");
         dairy.innerText = `Not Dairy Free`;
         icon.className = `fa fa-solid fa-wheat-awn icon mb-2 red`;
-        this.shadowDOM.getElementById('dairy').appendChild(icon);
-        this.shadowDOM.getElementById('dairy').appendChild(dairy);
+        this.shadowDOM.getElementById("dairy").appendChild(icon);
+        this.shadowDOM.getElementById("dairy").appendChild(dairy);
       }
     };
 
     getInstructions();
     getQuickInfo();
-    this.shadowRoot.addEventListener('click', this);
+    this.shadowRoot.addEventListener("click", this);
   }
 }
-customElements.define('recipe-detail', RecipeDetail);
+customElements.define("recipe-detail", RecipeDetail);
